@@ -1,24 +1,87 @@
-ul {
-    list-style-type: none;
-    padding: 0;
+.doctor-schedule-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
   }
   
-  .doctor-item {
-    padding: 15px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 6px;
-    background-color: #f9f9f9;
+  .doctor-selection,
+  .appointment-details {
+    margin-bottom: 20px;
   }
   
-  .search-box, .filter-dropdown, .sort-dropdown {
-    margin-bottom: 15px;
-    padding: 8px;
+  .doctor-selection select {
+    padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
     width: 100%;
     box-sizing: border-box;
+  }
+  
+  .calendar-container {
+    margin-bottom: 20px;
+  }
+  
+  .calendar-tile {
+    border-radius: 50%;
+  }
+  
+  .calendar-tile.available {
+    background-color: #d4edda; /* Green for available */
+    color: #155724;
+  }
+  
+  .calendar-tile.occupied {
+    background-color: #f8d7da; /* Red for occupied */
+    color: #721c24;
+  }
+  
+  .calendar-tile.on-leave {
+    background-color: #fff3cd; /* Yellow for on leave */
+    color: #856404;
+  }
+  
+  .calendar-tile.booked {
+    background-color: #cce5ff; /* Light blue for booked appointments */
+    color: #004085;
+  }
+  
+  .appointment-details textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    height: 100px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .book-button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .book-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .appointments-list {
+    margin-top: 20px;
+  }
+  
+  .appointments-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .appointments-list li {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
   }
   

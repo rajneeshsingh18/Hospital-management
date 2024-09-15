@@ -5,6 +5,8 @@ import App from './App.jsx'
 import './index.css'
 import QueueStatus from './components/QueueStatus.jsx';
 import DoctorSchedule from './components/DoctorSchedule.jsx';
+import MedicineInventory from './components/MedicineInventory.jsx';
+import PatientHealthRecord from './components/PatientHealthRecord.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -12,5 +14,7 @@ createRoot(document.getElementById('root')).render(
     <BedAvailability />
     <QueueStatus/>
     <DoctorSchedule/>
+    <MedicineInventory/>
+    <PatientHealthRecord/>
   </StrictMode>,
 )

@@ -4,37 +4,39 @@ import '../components/BedAvailability.css';
 const BedAvailability = () => {
   const [beds, setBeds] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filter, setFilter] = useState('All');
-  const [sortOption, setSortOption] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All');
+  const [selectedBed, setSelectedBed] = useState(null);
 
   useEffect(() => {
-    // Simulating fetching bed availability
-    setBeds([
-      { id: 1, hospital: 'City Hospital', available: 5, status: 'Available' },
-      { id: 2, hospital: 'Metro Hospital', available: 0, status: 'Critical' },
-      { id: 3, hospital: 'General Hospital', available: 2, status: 'Available' },
-      { id: 4, hospital: 'River Hospital', available: 0, status: 'Critical' },
-    ]);
+    // Simulate fetching bed availability data
+    const fetchData = async () => {
+      // Example static data; replace with API call
+      const bedData = [
+        { id: 1, hospital: 'City Hospital', department: 'Emergency', available: 5, status: 'Available' },
+        { id: 2, hospital: 'Metro Hospital', department: 'Surgery', available: 0, status: 'Critical' },
+        { id: 3, hospital: 'Greenwood Clinic', department: 'ICU', available: 2, status: 'Low Stock' },
+        { id: 4, hospital: 'Bright Hospital', department: 'General', available: 10, status: 'Available' },
+      ];
+      setBeds(bedData);
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 30000); // Refresh data every 30 seconds
+    return () => clearInterval(interval); // Clean up on component unmount
   }, []);
 
-  // Search hospitals based on user input
   const filteredBeds = beds
-    .filter((bed) => bed.hospital.toLowerCase().includes(searchQuery.toLowerCase()))
-    .filter((bed) => {
-      if (filter === 'Available') return bed.available > 0;
-      if (filter === 'Critical') return bed.available === 0;
-      return true;
-    });
+    .filter(bed => bed.hospital.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(bed => statusFilter === 'All' || bed.status === statusFilter);
 
-  // Sort hospitals by hospital name or availability
-  const sortedBeds = [...filteredBeds].sort((a, b) => {
-    if (sortOption === 'name') return a.hospital.localeCompare(b.hospital);
-    if (sortOption === 'availability') return b.available - a.available;
-    return 0;
-  });
+  const handleBookBed = (bed) => {
+    setSelectedBed(bed);
+    // Simulate booking process
+    alert(`Bed at ${bed.hospital}, Department: ${bed.department} booked!`);
+  };
 
   return (
-    <div>
+    <div className="bed-availability-container">
       <h2>Real-Time Bed Availability</h2>
 
       {/* Search Input */}
@@ -46,36 +48,46 @@ const BedAvailability = () => {
         className="search-box"
       />
 
-      {/* Filter by Availability */}
-      <select value={filter} onChange={(e) => setFilter(e.target.value)} className="filter-dropdown">
-        <option value="All">All</option>
+      {/* Filter by Status */}
+      <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="filter-dropdown">
+        <option value="All">All Status</option>
         <option value="Available">Available</option>
+        <option value="Low Stock">Low Stock</option>
         <option value="Critical">Critical</option>
       </select>
 
-      {/* Sort Options */}
-      <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="sort-dropdown">
-        <option value="">Sort By</option>
-        <option value="name">Hospital Name</option>
-        <option value="availability">Bed Availability</option>
-      </select>
-
-      {/* List of Beds */}
+      {/* List of Bed Availability */}
       <ul>
-        {sortedBeds.length > 0 ? (
-          sortedBeds.map((bed) => (
-            <li key={bed.id} className={bed.available > 0 ? 'bg-green' : 'bg-red'}>
-              <span>{bed.hospital}</span>
-              <div className="bold">{bed.status}</div>
+        {filteredBeds.length > 0 ? (
+          filteredBeds.map((bed) => (
+            <li
+              key={bed.id}
+              className={`bed-item ${bed.status.toLowerCase().replace(' ', '-')}`}
+            >
+              <span>{bed.hospital} - {bed.department}</span>
+              <div>Available Beds: {bed.available}</div>
+              <div>Status: {bed.status}</div>
+              {bed.available > 0 && (
+                <button onClick={() => handleBookBed(bed)} className="book-button">
+                  Book Bed
+                </button>
+              )}
             </li>
           ))
         ) : (
-          <li>No hospitals found.</li>
+          <li>No beds available.</li>
         )}
       </ul>
+
+      {selectedBed && (
+        <div className="booking-modal">
+          <h3>Booking Confirmation</h3>
+          <p>You have booked a bed at {selectedBed.hospital}, Department: {selectedBed.department}.</p>
+          <button onClick={() => setSelectedBed(null)} className="close-button">Close</button>
+        </div>
+      )}
     </div>
   );
 };
 
 export default BedAvailability;
-
