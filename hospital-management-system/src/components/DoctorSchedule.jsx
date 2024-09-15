@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import '../components/DoctorSchedule.css';
+import '../components/DoctorSchedule.css'; // Import the custom CSS file
 
 const DoctorSchedule = () => {
   const [date, setDate] = useState(new Date());
@@ -105,4 +105,3 @@ const DoctorSchedule = () => {
 };
 
 export default DoctorSchedule;
-

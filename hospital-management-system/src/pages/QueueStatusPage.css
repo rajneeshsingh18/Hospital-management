@@ -1,0 +1,12 @@
+.queue-status-page {
+    padding: 20px;
+    background-color: hsl(0, 0%, 0%);
+    min-height: 100vh;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  

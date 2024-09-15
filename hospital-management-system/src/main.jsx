@@ -11,10 +11,10 @@ import PatientHealthRecord from './components/PatientHealthRecord.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
-    <BedAvailability />
+    {/* <BedAvailability />
     <QueueStatus/>
     <DoctorSchedule/>
     <MedicineInventory/>
-    <PatientHealthRecord/>
+    <PatientHealthRecord/> */}
   </StrictMode>,
 )
