@@ -1,0 +1,35 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 15px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.bg-green {
+  background-color: hsl(120, 15%, 78%);
+}
+
+.bg-red {
+  background-color: hsl(0, 26%, 84%);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.search-box, .filter-dropdown, .sort-dropdown {
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
