@@ -92,7 +92,7 @@ const Dashboard = () => {
 
         {/* Doctor Availability */}
         <div className="panel doctor-availability">
-          <img src={MaleDoctor} alt="Hospital Icon" width={150} height={150} />
+          <img src={MaleDoctor} alt="Hospital Icon" width={150} height={200} />
 
           <h2 style={{ color: "black" }}>Doctor Availability and Scheduling</h2>
           <div className="doctor-card">
