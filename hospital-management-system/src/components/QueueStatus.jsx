@@ -1,36 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import '../components/QueueStatus.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./QueueStatus.css"; // Make sure this path is correct
 
 const QueueStatus = () => {
   const [patients, setPatients] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
 
   useEffect(() => {
-    // Simulate fetching patient queue data
-    const fetchData = async () => {
-      // Example static data
-      const dummyData = [
-        { id: 1, name: 'John Doe', condition: 'Heart Attack', priority: 'high' },
-        { id: 2, name: 'Jane Smith', condition: 'Flu', priority: 'low' },
-        { id: 3, name: 'Emily Johnson', condition: 'Broken Leg', priority: 'medium' },
-        { id: 4, name: 'Michael Brown', condition: 'Diabetes', priority: 'medium' },
-      ];
-      setPatients(dummyData);
+    const fetchPatients = async () => {
+      try {
+        console.log("Fetching patients data...");
+        const res = await axios.get("http://localhost:5000/api/patients");
+        console.log("Response received:", res);
+        setPatients(res.data);
+      } catch (err) {
+        console.error("Error fetching patients data:", err);
+      }
     };
 
-    fetchData();
-    const interval = setInterval(fetchData, 30000); // Refresh data every 30 seconds
-    return () => clearInterval(interval); // Clean up on component unmount
+    fetchPatients();
   }, []);
 
   const filteredPatients = patients
-    .filter(patient => patient.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    .filter(patient => statusFilter === 'All' || patient.priority === statusFilter);
+    .filter((patient) =>
+      patient.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .filter(
+      (patient) =>
+        statusFilter === "All" || patient.priorityCategory === statusFilter
+    );
+
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case "High":
+        return "#ff4d4d"; // Red
+      case "Medium":
+        return "#ffa500"; // Orange
+      case "Low":
+        return "#4caf50"; // Green
+      default:
+        return "#f2f2f2"; // Default color
+    }
+  };
 
   return (
     <div className="queue-status-container">
-      <h2 style={{ color: 'black' }} >Patient Queue Status</h2>
+      <h1>Patient Queue Status</h1>
 
       {/* Search Input */}
       <input
@@ -42,27 +58,57 @@ const QueueStatus = () => {
       />
 
       {/* Filter by Priority */}
-      <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="filter-dropdown">
+      <select
+        value={statusFilter}
+        onChange={(e) => setStatusFilter(e.target.value)}
+        className="filter-dropdown"
+      >
         <option value="All">All Priorities</option>
-        <option value="high">High Priority</option>
-        <option value="medium">Medium Priority</option>
-        <option value="low">Low Priority</option>
+        <option value="High">High Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="Low">Low Priority</option>
       </select>
 
       {/* List of Patient Queue Status */}
-      <ul>
+      <div>
         {filteredPatients.length > 0 ? (
           filteredPatients.map((patient) => (
-            <li key={patient.id} className={`patient-item ${patient.priority}`}>
-              <span>{patient.name}</span>
-              <div>Condition: {patient.condition}</div>
-              <div>Priority: {patient.priority}</div>
-            </li>
+            <div
+              key={patient._id}
+              className="patientProfile"
+              style={{
+                backgroundColor: getPriorityColor(patient.priorityCategory),
+              }}
+            >
+              <div className="svgContainer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#fff"
+                  color="#fff"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  style={{ width: "24px", height: "24px" }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p>
+                  {patient.name} - {patient.age} - {patient.priorityCategory}
+                </p>
+                <p>Symptoms: {patient.symptoms}</p>
+              </div>
+            </div>
           ))
         ) : (
-          <li>No patients in the queue.</li>
+          <p>No patients found.</p>
         )}
-      </ul>
+      </div>
     </div>
   );
 };
