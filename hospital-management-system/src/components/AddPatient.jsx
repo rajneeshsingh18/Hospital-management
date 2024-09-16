@@ -17,17 +17,21 @@ const AddPatient = () => {
         age,
         symptoms,
         priorityCategory,
+        description,
       });
       console.log("Patient added:", response.data);
       setName("");
       setAge("");
+      setSymptoms("");
+      setPriorityCategory("");
+      setDescription("");
     } catch (error) {
       console.error("Error adding patient:", error);
     }
   };
 
   return (
-    <div>
+    <div className="addPatientContainer">
       <h2 className="addPatientTitle">Add Patient</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -45,27 +49,27 @@ const AddPatient = () => {
           required
         />
         <input
-          type="symptoms"
-          placeholder="symptoms"
+          type="text"
+          placeholder="Symptoms"
           value={symptoms}
           onChange={(e) => setSymptoms(e.target.value)}
           required
         />
         <input
-          type="priorityCategory"
+          type="text"
           placeholder="Priority Category"
           value={priorityCategory}
           onChange={(e) => setPriorityCategory(e.target.value)}
           required
         />
-        <input
-          type="description"
+        <textarea
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          rows="4" // Adjust the number of rows to set the initial height
           required
         />
-        <button type="submit">Add Patient</button>
+        <input type="submit" value="Add Patient" />
       </form>
     </div>
   );

@@ -32,6 +32,10 @@ const Header = () => {
           <FaPills className="link-icon" />
           Medicine Inventory
         </Link>
+        <Link to="/addpatients" className="dashboard-link">
+          <FaPills className="link-icon" />
+          Add Patients
+        </Link>
       </nav>
 
       {/* Auth Buttons */}
