@@ -1,17 +1,19 @@
-import Dashboard from "./components/Dashboard";
-import BedAvailabilityPage from "./pages/BedAvailabilityPage";
-import QueueStatusPage from "./pages/QueueStatusPage";
-import AppointmentSchedulingPage from "./pages/AppointmentSchedulingPage";
-import MedicineInventoryPage from "./pages/MedicineInventoryPage";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/header/Header";
-import PatientList from "./components/PatientList";
 import AddPatient from "./components/AddPatient";
+import Dashboard from "./components/Dashboard";
+import Navbar from "./components/navbar/navbar";
+import PatientList from "./components/PatientList";
+import AppointmentSchedulingPage from "./pages/AppointmentSchedulingPage";
+import BedAvailabilityPage from "./pages/BedAvailabilityPage";
+import MedicineInventoryPage from "./pages/MedicineInventoryPage";
+import QueueStatusPage from "./pages/QueueStatusPage";
+import Header from "./components/header";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
