@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #f5f6fa;
   margin: 0;
   padding: 0;
@@ -281,4 +281,26 @@ h2 {
   .info-card {
     width: 100%;
   }
+}
+
+/* Appointments List */
+.appointments-list {
+  margin-top: 20px;
+}
+
+.appointments-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.appointments-list li {
+  background-color: #ecf0f1;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.appointments-list li:hover {
+  background-color: #bdc3c7;
 }

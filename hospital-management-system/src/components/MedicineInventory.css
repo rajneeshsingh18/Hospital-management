@@ -23,7 +23,8 @@
   margin-bottom: 20px;
 }
 
-.medicine-inventory th, .medicine-inventory td {
+.medicine-inventory th,
+.medicine-inventory td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -103,7 +104,8 @@ button:hover {
     padding: 15px;
   }
 
-  .medicine-inventory th, .medicine-inventory td {
+  .medicine-inventory th,
+  .medicine-inventory td {
     font-size: 0.9rem;
     padding: 8px;
   }
