@@ -6,7 +6,7 @@
   backdrop-filter: blur(10px); /* Blur for glassmorphism effect */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
   text-align: center;
-  max-width: 1200px;
+  max-width: 1205px;
   margin: auto;
   color: #333;
 }
