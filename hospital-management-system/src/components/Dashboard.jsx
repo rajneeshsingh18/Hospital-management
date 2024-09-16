@@ -1,10 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { FaBed, FaClipboardList, FaCalendarAlt, FaPills } from "react-icons/fa"; // Icons for links
 import "../components/Dashboard.css";
 import MaleDoctor from "../assets/maledoctor.svg";
-import Hospital from "../assets/hospital.svg";
-import MedicalAppoinment from "../assets/medical-appoinment-female.svg";
 import Queue from "../assets/queue.svg";
 import MedicalFiles from "../assets/medicalFiles.svg";
 import HospitalBed from "../assets/hospitalBed.svg";
@@ -12,36 +8,6 @@ import HospitalBed from "../assets/hospitalBed.svg";
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      {/* Header and Title */}
-
-      <img src={Hospital} alt="Hospital Icon" width={60} height={60} />
-      <h1 className="dashboard-title">Hospital Management Dashboard</h1>
-
-      {/* Navigation Links */}
-      <div className="dashboard-links">
-        <Link to="/bed-availability" className="dashboard-link">
-          <FaBed className="link-icon" />
-          Bed Availability
-        </Link>
-        <Link to="/queue-status" className="dashboard-link">
-          <FaClipboardList className="link-icon" />
-          Queue Status
-        </Link>
-        <Link to="/appointments" className="dashboard-link">
-          <FaCalendarAlt className="link-icon" />
-          Appointments
-        </Link>
-        <Link to="/medicine-inventory" className="dashboard-link">
-          <FaPills className="link-icon" />
-          Medicine Inventory
-        </Link>
-      </div>
-
-      <div className="auth-buttons">
-        <button>Login</button>
-        <button>Register</button>
-      </div>
-
       {/* Main Content */}
       <main className="main-content">
         {/* Overview Panels */}
@@ -145,7 +111,6 @@ const Dashboard = () => {
 
         {/* Patient Health Records */}
         <div className="panel health-record">
-         
           <div
             style={{
               display: "flex",
