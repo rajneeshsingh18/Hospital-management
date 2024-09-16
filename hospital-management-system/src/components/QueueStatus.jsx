@@ -30,7 +30,7 @@ const QueueStatus = () => {
 
   return (
     <div className="queue-status-container">
-      <h2>Patient Queue Status</h2>
+      <h2 style={{ color: 'black' }} >Patient Queue Status</h2>
 
       {/* Search Input */}
       <input

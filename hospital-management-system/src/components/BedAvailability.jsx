@@ -37,7 +37,7 @@ const BedAvailability = () => {
 
   return (
     <div className="bed-availability-container">
-      <h2>Real-Time Bed Availability</h2>
+      <h2 style={{ color: 'black' }} >Real-Time Bed Availability</h2>
 
       {/* Search Input */}
       <input

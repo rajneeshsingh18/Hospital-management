@@ -1,65 +1,75 @@
-
-
 import React, { useState, useEffect } from 'react';
-import '../components/MedicineInventory.css';
+import './MedicineInventory.css';
 
 const MedicineInventory = () => {
-  const [inventory, setInventory] = useState([]);
-  const [reorderRequests, setReorderRequests] = useState([]);
+  // Demo data for medicines inventory
+  const [inventory, setInventory] = useState([
+    { id: 1, name: 'Paracetamol', stock: 50, minStock: 20, expiry: '2025-01-01' },
+    { id: 2, name: 'Ibuprofen', stock: 5, minStock: 10, expiry: '2023-12-31' },
+    { id: 3, name: 'Insulin', stock: 30, minStock: 10, expiry: '2024-03-15' },
+    { id: 4, name: 'Cough Syrup', stock: 100, minStock: 50, expiry: '2026-05-10' },
+  ]);
 
   useEffect(() => {
-    // Simulate fetching data from an API
-    setInventory([
-      { id: 1, name: 'Aspirin', stock: 20, threshold: 15 },
-      { id: 2, name: 'Ibuprofen', stock: 5, threshold: 10 },
-      { id: 3, name: 'Paracetamol', stock: 50, threshold: 20 },
-    ]);
-  }, []);
+    checkInventory();
+  }, [inventory]);
 
-  const handleReorder = (item) => {
-    setReorderRequests([...reorderRequests, item]);
-    alert(`Reorder request for ${item.name} submitted.`);
+  // Function to check for reorder needs (Low stock or near expiry)
+  const checkInventory = () => {
+    const itemsToReorder = inventory.filter(item => {
+      const needsReorder = item.stock <= item.minStock;
+      const nearExpiry = new Date(item.expiry) <= new Date(new Date().setMonth(new Date().getMonth() + 6));
+      return needsReorder || nearExpiry;
+    });
+
+    if (itemsToReorder.length > 0) {
+      console.log("Items to reorder:", itemsToReorder);
+    }
+  };
+
+  // Dummy function to simulate reorder process
+  const triggerReorder = (item) => {
+    alert(`Reorder placed for ${item.name}!`);
   };
 
   return (
-    <div className="medicine-inventory-container">
-      <h2>Medicine Inventory</h2>
-      <table className="inventory-table">
+    <div className="medicine-inventory">
+      <h3>Medicine Inventory</h3>
+      <table>
         <thead>
           <tr>
             <th>Medicine</th>
-            <th>Stock Level</th>
+            <th>Stock</th>
+            <th>Minimum Stock</th>
+            <th>Expiry Date</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {inventory.map((item) => (
-            <tr key={item.id} className={item.stock <= item.threshold ? 'low-stock' : ''}>
-              <td>{item.name}</td>
-              <td>{item.stock}</td>
-              <td>{item.stock <= item.threshold ? 'Low Stock' : 'Sufficient'}</td>
-              <td>
-                {item.stock <= item.threshold ? (
-                  <button onClick={() => handleReorder(item)} className="reorder-button">
-                    Reorder
-                  </button>
-                ) : (
-                  <span>No action needed</span>
-                )}
-              </td>
-            </tr>
-          ))}
+          {inventory.map(item => {
+            const needsReorder = item.stock <= item.minStock;
+            const nearExpiry = new Date(item.expiry) <= new Date(new Date().setMonth(new Date().getMonth() + 6));
+
+            return (
+              <tr key={item.id} className={needsReorder ? 'low-stock' : nearExpiry ? 'near-expiry' : ''}>
+                <td>{item.name}</td>
+                <td>{item.stock}</td>
+                <td>{item.minStock}</td>
+                <td>{item.expiry}</td>
+                <td>
+                  {needsReorder ? 'Low Stock' : nearExpiry ? 'Near Expiry' : 'Sufficient Stock'}
+                </td>
+                <td>
+                  {(needsReorder || nearExpiry) && (
+                    <button onClick={() => triggerReorder(item)}>Reorder</button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
-      <div className="reorder-requests">
-        <h3>Reorder Requests</h3>
-        <ul>
-          {reorderRequests.map((request, index) => (
-            <li key={index}>{request.name}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };

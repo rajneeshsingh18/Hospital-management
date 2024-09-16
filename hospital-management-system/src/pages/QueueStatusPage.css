@@ -1,7 +1,8 @@
 .queue-status-page {
     padding: 20px;
-    background-color: hsl(0, 0%, 0%);
+    background-color: hsl(214, 76%, 80%);
     min-height: 100vh;
+    border-radius: 15px;
   }
   
   h2 {

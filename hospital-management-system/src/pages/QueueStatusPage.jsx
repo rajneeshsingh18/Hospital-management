@@ -5,7 +5,7 @@ import './QueueStatusPage.css';
 const QueueStatusPage = () => {
   return (
     <div className="queue-status-page">
-      <h2>OPD Queue Status</h2>
+      {/* <h2>OPD Queue Status</h2> */}
       {/* Include the existing QueueStatus component here */}
       <QueueStatus />
     </div>

@@ -5,8 +5,8 @@ import './MedicineInventoryPage.css'; // Import the corresponding CSS file
 const MedicineInventoryPage = () => {
   return (
     <div className="medicine-inventory-page">
-      <h2>Medicine Inventory</h2>
-      <MedicineInventory /> {/* Render the MedicineInventory component */}
+      {/* <h2>Medicine Inventory</h2> */}
+     <MedicineInventory />  {/* Render the MedicineInventory component */}
     </div>
   );
 };
