@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -32,28 +32,28 @@ export default function BedAvailability() {
       const bedData = [
         {
           id: 1,
-          hospital: "City Hospital",
+          hospital: "AIIMS",
           department: "Emergency",
           available: 5,
           status: "Available",
         },
         {
           id: 2,
-          hospital: "Metro Hospital",
+          hospital: "Safdurjung Hospital",
           department: "Surgery",
           available: 0,
           status: "Critical",
         },
         {
           id: 3,
-          hospital: "Greenwood Clinic",
+          hospital: "Ram Manohar Lohia Hospital",
           department: "ICU",
           available: 2,
           status: "Low Stock",
         },
         {
           id: 4,
-          hospital: "Bright Hospital",
+          hospital: "Rajiv Gandhi Hospital",
           department: "General",
           available: 10,
           status: "Available",

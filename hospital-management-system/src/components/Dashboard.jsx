@@ -11,7 +11,7 @@ const PatternSVG = () => (
     width="100%"
     height="100%"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ position: 'absolute', top: 0, left: 0, opacity: 0.05 }}
+    style={{ position: "absolute", top: 0, left: 0, opacity: 0.05 }}
   >
     <rect width="100" height="100" fill="none" stroke="#ccc" />
   </svg>
@@ -29,10 +29,34 @@ export default function Dashboard() {
         {/* Overview Panels */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { title: "Total Patients", value: "120", icon: Users, color: 'bg-blue-100', hoverColor: 'hover:bg-blue-200' },
-            { title: "Available Beds", value: "25", icon: Bed, color: 'bg-green-100', hoverColor: 'hover:bg-green-200' },
-            { title: "Today's Appointments", value: "32", icon: Clock, color: 'bg-yellow-100', hoverColor: 'hover:bg-yellow-200' },
-            { title: "Critical Alerts", value: "3", icon: FileText, color: 'bg-red-100', hoverColor: 'hover:bg-red-200' },
+            {
+              title: "Total Patients",
+              value: "120",
+              icon: Users,
+              color: "bg-blue-100",
+              hoverColor: "hover:bg-blue-200",
+            },
+            {
+              title: "Available Beds",
+              value: "25",
+              icon: Bed,
+              color: "bg-green-100",
+              hoverColor: "hover:bg-green-200",
+            },
+            {
+              title: "Today's Appointments",
+              value: "32",
+              icon: Clock,
+              color: "bg-yellow-100",
+              hoverColor: "hover:bg-yellow-200",
+            },
+            {
+              title: "Critical Alerts",
+              value: "3",
+              icon: FileText,
+              color: "bg-red-100",
+              hoverColor: "hover:bg-red-200",
+            },
           ].map((item, index) => (
             <Card
               key={index}
@@ -83,9 +107,24 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { ward: "General Ward", status: "Available", beds: 10, hoverColor: 'hover:bg-green-200' },
-              { ward: "ICU", status: "Reserved", beds: 2, hoverColor: 'hover:bg-yellow-200' },
-              { ward: "Pediatrics", status: "Critical", beds: 1, hoverColor: 'hover:bg-red-200' },
+              {
+                ward: "General Ward",
+                status: "Available",
+                beds: 10,
+                hoverColor: "hover:bg-green-200",
+              },
+              {
+                ward: "Emergency Ward",
+                status: "Reserved",
+                beds: 2,
+                hoverColor: "hover:bg-yellow-200",
+              },
+              {
+                ward: "Pediatrics",
+                status: "Critical",
+                beds: 1,
+                hoverColor: "hover:bg-red-200",
+              },
             ].map((item, index) => (
               <Card
                 key={index}
@@ -97,11 +136,11 @@ export default function Dashboard() {
                 <CardContent>
                   <p
                     className={`text-sm ${
-                      item.status === 'Available'
-                        ? 'text-green-600'
-                        : item.status === 'Reserved'
-                        ? 'text-yellow-600'
-                        : 'text-red-600'
+                      item.status === "Available"
+                        ? "text-green-600"
+                        : item.status === "Reserved"
+                        ? "text-yellow-600"
+                        : "text-red-600"
                     }`}
                   >
                     Status: {item.status}
@@ -120,8 +159,18 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { department: "General OPD", queueLength: 15, waitTime: 45, hoverColor: 'hover:bg-blue-200' },
-              { department: "Cardiology OPD", queueLength: 10, waitTime: 30, hoverColor: 'hover:bg-blue-300' },
+              {
+                department: "General OPD",
+                queueLength: 15,
+                waitTime: 45,
+                hoverColor: "hover:bg-blue-200",
+              },
+              {
+                department: "Cardiology OPD",
+                queueLength: 10,
+                waitTime: 30,
+                hoverColor: "hover:bg-blue-300",
+              },
             ].map((item, index) => (
               <Card
                 key={index}
@@ -143,30 +192,33 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-
         <Card className="bg-white/80 backdrop-blur-sm shadow-lg hover:bg-blue-100 transition-transform transform hover:scale-105 hover:shadow-xl">
-  <CardHeader>
-    <CardTitle>Patient Health Record Integration</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-4">
-    <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
-      <Input type="file" className="flex-1" />
-      <Button className="w-full sm:w-auto hover:bg-blue-600">Upload</Button>
-    </div>
-    <div>
-      <h3 className="font-semibold mb-2">View Previous Visits</h3>
-      <ul className="space-y-1">
-        <li className="text-sm text-gray-600 hover:text-blue-600">
-          Visit on 01/05/2023 - Dr. John Doe
-        </li>
-        <li className="text-sm text-gray-600 hover:text-blue-600">
-          Visit on 15/04/2023 - Dr. Jane Smith
-        </li>
-      </ul>
-    </div>
-  </CardContent>
-</Card>
-
+          <CardHeader>
+            <CardTitle>Patient Health Record Integration</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+              <Input type="file" className="flex-1" />
+              <Button className="w-full sm:w-auto hover:bg-blue-600">
+                Upload
+              </Button>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">View Previous Visits</h3>
+              <ul className="space-y-1">
+                <li className="text-sm text-gray-600 hover:text-blue-600">
+                  Visit on 01/05/2023 - Dr. Rajeev Kapoor
+                </li>
+                <li className="text-sm text-gray-600 hover:text-blue-600">
+                  Visit on 15/04/2023 - Dr. Anjali Singh
+                </li>
+                <li className="text-sm text-gray-600 hover:text-blue-600">
+                  Visit on 15/04/2023 - Dr. Karan Ahuja
+                </li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );
