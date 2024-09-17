@@ -15,32 +15,25 @@ const Navbar = () => {
             <div className="flex items-center">
               <img src={Hospital} alt="Logo" className="h-10 w-10 mr-3" />
               <span className="text-2xl font-bold text-primary">
-              <a href="/Dashboard">Hospital Dashboard</a>
+                <a href="/Dashboard">Admin Dashboard</a>
               </span>
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <a
-              href="/home"
+              href="/"
               className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
             >
               Home
             </a>
-            <Link
-              to="/contact"
-              className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Contact Us
-            </Link>
-            <Link
-              to="/about"
-              className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              About
-            </Link>
+
             <div className="hidden md:flex items-center space-x-2">
-              <Button variant="ghost">Login</Button>
-              <Button variant="outline">Register</Button>
+              <Button variant="ghost" className="bg-teal-400">
+                Login
+              </Button>
+              <Button variant="outline" className="bg-teal-400">
+                Register
+              </Button>
             </div>
           </div>
           <div className="flex items-center sm:hidden">

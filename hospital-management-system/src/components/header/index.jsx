@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 
 const navItems = [
+  { to: "/", icon: UserPlus, label: "Home" },
   { to: "/bed-availability", icon: Bed, label: "Bed Availability" },
   { to: "/queue-status", icon: ClipboardList, label: "Queue Status" },
   { to: "/appointments", icon: Calendar, label: "Appointments" },
