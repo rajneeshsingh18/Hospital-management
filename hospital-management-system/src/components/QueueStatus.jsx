@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./QueueStatus.css"; // Make sure this path is correct
+import { Input } from "../components/ui/input";
+import {
+  Select,
+  SelectTrigger,
+  SelectItem,
+  SelectContent,
+  SelectGroup,
+} from "../components/ui/select";
+import { Card, CardContent, CardHeader } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 
 const QueueStatus = () => {
   const [patients, setPatients] = useState([]);
@@ -10,15 +19,12 @@ const QueueStatus = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        console.log("Fetching patients data...");
         const res = await axios.get("http://localhost:5000/api/patients");
-        console.log("Response received:", res);
         setPatients(res.data);
       } catch (err) {
         console.error("Error fetching patients data:", err);
       }
     };
-
     fetchPatients();
   }, []);
 
@@ -34,79 +40,75 @@ const QueueStatus = () => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case "High":
-        return "#ff4d4d"; // Red
+        return "bg-red-500"; // Red
       case "Medium":
-        return "#ffa500"; // Orange
+        return "bg-yellow-500"; // Orange
       case "Low":
-        return "#4caf50"; // Green
+        return "bg-green-500"; // Green
       default:
-        return "#f2f2f2"; // Default color
+        return "bg-gray-200"; // Default color
     }
   };
 
   return (
-    <div className="queue-status-container">
-      <h1>Patient Queue Status</h1>
+    <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold text-center mb-6">
+        Patient Queue Status
+      </h1>
 
       {/* Search Input */}
-      <input
-        type="text"
+      <Input
         placeholder="Search Patient"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="search-box"
+        className="mb-4"
       />
 
       {/* Filter by Priority */}
-      <select
+      <Select
         value={statusFilter}
-        onChange={(e) => setStatusFilter(e.target.value)}
-        className="filter-dropdown"
+        onValueChange={(val) => setStatusFilter(val)}
       >
-        <option value="All">All Priorities</option>
-        <option value="High">High Priority</option>
-        <option value="Medium">Medium Priority</option>
-        <option value="Low">Low Priority</option>
-      </select>
+        <SelectTrigger className="mb-4">
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="All">All Priorities</SelectItem>
+              <SelectItem value="High">High Priority</SelectItem>
+              <SelectItem value="Medium">Medium Priority</SelectItem>
+              <SelectItem value="Low">Low Priority</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </SelectTrigger>
+      </Select>
 
       {/* List of Patient Queue Status */}
-      <div>
+      <div className="space-y-4">
         {filteredPatients.length > 0 ? (
           filteredPatients.map((patient) => (
-            <div
+            <Card
               key={patient._id}
-              className="patientProfile"
-              style={{
-                backgroundColor: getPriorityColor(patient.priorityCategory),
-              }}
+              className="transition-transform transform hover:scale-105"
             >
-              <div className="svgContainer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#fff"
-                  color="#fff"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  style={{ width: "24px", height: "24px" }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p>
-                  {patient.name} - {patient.age} - {patient.priorityCategory}
+              <CardHeader
+                className={`${getPriorityColor(
+                  patient.priorityCategory
+                )} p-4 rounded-t-md`}
+              >
+                <Badge className="text-white">{patient.priorityCategory}</Badge>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <p className="text-xl font-semibold">{patient.name}</p>
+                  <p className="text-gray-500">{patient.age} years old</p>
+                </div>
+                <p className="text-gray-700 mt-2">
+                  Symptoms: {patient.symptoms}
                 </p>
-                <p>Symptoms: {patient.symptoms}</p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))
         ) : (
-          <p>No patients found.</p>
+          <p className="text-center text-gray-500">No patients found.</p>
         )}
       </div>
     </div>
