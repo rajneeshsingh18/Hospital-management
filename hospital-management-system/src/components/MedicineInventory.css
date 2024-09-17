@@ -115,3 +115,17 @@ button:hover {
     font-size: 0.9rem;
   }
 }
+
+  /* Custom WebKit Scrollbar for Stock and MinStock Columns */
+  .scrollbar-thumb-blue-500::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thumb-blue-500::-webkit-scrollbar-thumb {
+    background-color: #3b82f6; /* Tailwind's blue-500 */
+    border-radius: 10px;
+  }
+  
+  .scrollbar-track-gray-200::-webkit-scrollbar-track {
+    background-color: #e5e7eb; /* Tailwind's gray-200 */
+  }
