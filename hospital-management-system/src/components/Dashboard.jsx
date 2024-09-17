@@ -29,14 +29,14 @@ export default function Dashboard() {
         {/* Overview Panels */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { title: "Total Patients", value: "120", icon: Users },
-            { title: "Available Beds", value: "25", icon: Bed },
-            { title: "Today's Appointments", value: "32", icon: Clock },
-            { title: "Critical Alerts", value: "3", icon: FileText },
+            { title: "Total Patients", value: "120", icon: Users, color: 'bg-blue-100', hoverColor: 'hover:bg-blue-200' },
+            { title: "Available Beds", value: "25", icon: Bed, color: 'bg-green-100', hoverColor: 'hover:bg-green-200' },
+            { title: "Today's Appointments", value: "32", icon: Clock, color: 'bg-yellow-100', hoverColor: 'hover:bg-yellow-200' },
+            { title: "Critical Alerts", value: "3", icon: FileText, color: 'bg-red-100', hoverColor: 'hover:bg-red-200' },
           ].map((item, index) => (
             <Card
               key={index}
-              className="bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
+              className={`${item.color} ${item.hoverColor} backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105`}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="flex items-center space-x-2 text-sm font-semibold">
@@ -83,19 +83,27 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { ward: "General Ward", status: "Available", beds: 10 },
-              { ward: "ICU", status: "Reserved", beds: 2 },
-              { ward: "Pediatrics", status: "Critical", beds: 1 },
+              { ward: "General Ward", status: "Available", beds: 10, hoverColor: 'hover:bg-green-200' },
+              { ward: "ICU", status: "Reserved", beds: 2, hoverColor: 'hover:bg-yellow-200' },
+              { ward: "Pediatrics", status: "Critical", beds: 1, hoverColor: 'hover:bg-red-200' },
             ].map((item, index) => (
               <Card
                 key={index}
-                className="bg-gray-50/50 transition-transform transform hover:scale-105 hover:shadow-lg"
+                className={`bg-gray-50/50 ${item.hoverColor} transition-transform transform hover:scale-105 hover:shadow-lg`}
               >
                 <CardHeader>
                   <CardTitle className="text-lg">{item.ward}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className={`text-sm ${item.status === 'Available' ? 'text-green-600' : item.status === 'Reserved' ? 'text-yellow-600' : 'text-red-600'}`}>
+                  <p
+                    className={`text-sm ${
+                      item.status === 'Available'
+                        ? 'text-green-600'
+                        : item.status === 'Reserved'
+                        ? 'text-yellow-600'
+                        : 'text-red-600'
+                    }`}
+                  >
                     Status: {item.status}
                   </p>
                   <p className="text-sm text-gray-600">Beds: {item.beds}</p>
@@ -112,10 +120,13 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { department: "General OPD", queueLength: 15, waitTime: 45 },
-              { department: "Cardiology OPD", queueLength: 10, waitTime: 30 },
+              { department: "General OPD", queueLength: 15, waitTime: 45, hoverColor: 'hover:bg-blue-200' },
+              { department: "Cardiology OPD", queueLength: 10, waitTime: 30, hoverColor: 'hover:bg-blue-300' },
             ].map((item, index) => (
-              <Card key={index} className="bg-gray-50/50 transition hover:shadow-lg">
+              <Card
+                key={index}
+                className={`bg-gray-50/50 ${item.hoverColor} transition hover:shadow-lg`}
+              >
                 <CardHeader>
                   <CardTitle className="text-lg">{item.department}</CardTitle>
                 </CardHeader>
@@ -132,64 +143,30 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Doctor Availability */}
-        <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
-          <CardHeader>
-            <CardTitle>Doctor Availability and Scheduling</CardTitle>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                name: "Dr. John Doe",
-                specialty: "Cardiology",
-                available: "10 AM - 4 PM",
-              },
-              {
-                name: "Dr. Jane Smith",
-                specialty: "Pediatrics",
-                available: "1 PM - 6 PM",
-              },
-            ].map((doctor, index) => (
-              <Card key={index} className="bg-gray-50/50 hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-lg">{doctor.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-600">
-                    Specialty: {doctor.specialty}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Available: {doctor.available}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </CardContent>
-        </Card>
 
-        {/* Patient Health Records */}
-        <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
-          <CardHeader>
-            <CardTitle>Patient Health Record Integration</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
-              <Input type="file" className="flex-1" />
-              <Button className="w-full sm:w-auto hover:bg-blue-600">Upload</Button>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">View Previous Visits</h3>
-              <ul className="space-y-1">
-                <li className="text-sm text-gray-600">
-                  Visit on 01/05/2023 - Dr. John Doe
-                </li>
-                <li className="text-sm text-gray-600">
-                  Visit on 15/04/2023 - Dr. Jane Smith
-                </li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
+        <Card className="bg-white/80 backdrop-blur-sm shadow-lg hover:bg-blue-100 transition-transform transform hover:scale-105 hover:shadow-xl">
+  <CardHeader>
+    <CardTitle>Patient Health Record Integration</CardTitle>
+  </CardHeader>
+  <CardContent className="space-y-4">
+    <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+      <Input type="file" className="flex-1" />
+      <Button className="w-full sm:w-auto hover:bg-blue-600">Upload</Button>
+    </div>
+    <div>
+      <h3 className="font-semibold mb-2">View Previous Visits</h3>
+      <ul className="space-y-1">
+        <li className="text-sm text-gray-600 hover:text-blue-600">
+          Visit on 01/05/2023 - Dr. John Doe
+        </li>
+        <li className="text-sm text-gray-600 hover:text-blue-600">
+          Visit on 15/04/2023 - Dr. Jane Smith
+        </li>
+      </ul>
+    </div>
+  </CardContent>
+</Card>
+
       </main>
     </div>
   );

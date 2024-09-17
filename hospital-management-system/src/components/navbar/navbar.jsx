@@ -15,17 +15,17 @@ const Navbar = () => {
             <div className="flex items-center">
               <img src={Hospital} alt="Logo" className="h-10 w-10 mr-3" />
               <span className="text-2xl font-bold text-primary">
-                Hospital Dashboard
+              <a href="/Dashboard">Hospital Dashboard</a>
               </span>
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Link
-              to="/home"
+            <a
+              href="/home"
               className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
             >
               Home
-            </Link>
+            </a>
             <Link
               to="/contact"
               className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
@@ -59,7 +59,7 @@ const Navbar = () => {
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1">
             <Link
-              to="/home"
+              to="/"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
             >
               Home
